@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class Bird : MonoBehaviour
 {
+    //public AngryBirdLine line;
     private Vector3 _initialPosition;
     private bool birdLaunched;
     private float timeSittingAround;
     [SerializeField] private float force = 300;
+    
 
     private void Awake()
     {
@@ -17,7 +19,8 @@ public class Bird : MonoBehaviour
     private void Update()
     {
         
-        GetComponent<LineRenderer>().SetPosition(0, transform.position);
+        GetComponent<LineRenderer>().SetPosition(0, transform.position );
+        
         GetComponent<LineRenderer>().SetPosition(1, _initialPosition);
         if (birdLaunched && GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1f)
         {
@@ -37,7 +40,7 @@ public class Bird : MonoBehaviour
     }
     private void OnMouseUp()
     {
-            GetComponent<SpriteRenderer>().color =Color.white;
+        GetComponent<SpriteRenderer>().color = Color.white;
         Vector2 directionToInitialPosition = _initialPosition - transform.position;
              GetComponent<Rigidbody2D>().AddForce(directionToInitialPosition * force);
         GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -48,5 +51,9 @@ public class Bird : MonoBehaviour
     {
         Vector2 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(newPosition.x, newPosition.y, 0);
+        
+        //Vector3 position = transform.position;
+        //line.SetPOsition(1, position);
+        
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Level : MonoBehaviour
 {
+    public bool EnemyAlive;
     private static int nextLevelIndex = 1;
     private Enemy[] enemies;
 
@@ -14,14 +15,28 @@ public class Level : MonoBehaviour
     }
     private void Update()
     {
-        foreach(Enemy enemy in enemies)
+        
+        foreach (Enemy enemy in enemies)
         {
             if (enemy != null)
+            {
+                
                 return;
+                
+            }           
+            
         }
         Debug.Log("You killed all Enemy");
         nextLevelIndex++;
-        string nextLevelName = "Level" + nextLevelIndex;
-        SceneManager.LoadScene(nextLevelName);
+        if ( nextLevelIndex == 4)
+        {
+            SceneManager.LoadScene("Endgame");
+        }
+        else
+        {
+            string nextLevelName = "Level " + nextLevelIndex;
+
+            SceneManager.LoadScene(nextLevelName);
+        }
     }
 }
